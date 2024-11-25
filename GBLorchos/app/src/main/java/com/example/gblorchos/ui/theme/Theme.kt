@@ -18,7 +18,8 @@ fun GBLorchosTheme(
     content: @Composable () -> Unit
 ) {
     MaterialTheme(
-        colorScheme = LightColorPalette,
+        colorScheme = lightColorScheme(),
+        typography = Typography,
         content = content
     )
 }

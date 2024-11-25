@@ -1,4 +1,4 @@
-package com.example.gblorchos.data.dao
+package com.example.gblorchos.data.database
 
 import androidx.room.Dao
 import androidx.room.Insert

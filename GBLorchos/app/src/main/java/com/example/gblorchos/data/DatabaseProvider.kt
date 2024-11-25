@@ -2,7 +2,7 @@ package com.example.gblorchos.data
 
 import android.content.Context
 import androidx.room.Room
-import com.example.gblorchos.data.dao.XogadorDao
+import com.example.gblorchos.data.database.XogadorDao
 
 class DatabaseProvider(context: Context) {
     private val db = Room.databaseBuilder(
