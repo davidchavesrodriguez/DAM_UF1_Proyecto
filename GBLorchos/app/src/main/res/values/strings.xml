@@ -1,3 +1,26 @@
 <resources>
-    <string name="app_name">GBLorchos</string>
+    <!-- Nome da aplicación -->
+    <string name="app_name">GB Lorchos</string>
+
+    <!-- AppTopBar -->
+    <string name="menu">Menú</string>
+
+    <!-- DrawerContent (Menú lateral) -->
+    <string name="main">Principal</string>
+    <string name="players">Xogadores</string>
+    <string name="events">Eventos</string>
+    <string name="results">Resultados</string>
+    <string name="shop">Tenda</string>
+
+    <!-- PrincipalContent -->
+    <string name="team_subtitle">Equipo gaélico do Barbanza</string>
+    <string name="team_description">Fundado no 2023, e para a historia!</string>
+    <string name="shield_description">Escudo de GB Lorchos</string>
+    <string name="tournament_description">Torneo da Estrada</string>
+    <string name="course_description">Lorchocurso</string>
+    <string name="gladiator_description">Lorcho Gladiador</string>
+
+    <!-- XogadoresContent -->
+    <string name="birth_year">Nacemento: %1$s</string>
+    <string name="points">Puntos: %1$d</string>
 </resources>

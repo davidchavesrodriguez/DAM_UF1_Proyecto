@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Application Name -->
+    <string name="app_name">GB Lorchos</string>
+
+    <!-- AppTopBar -->
+    <string name="menu">Roghchlár</string>
+
+    <!-- DrawerContent (Sidebar Menu) -->
+    <string name="main">Baile</string>
+    <string name="players">Imreoirí</string>
+    <string name="events">Imeachtaí</string>
+    <string name="results">Torthaí</string>
+    <string name="shop">Siopa</string>
+
+    <!-- PrincipalContent -->
+    <string name="team_subtitle">Foireann ghaelach ó Barbanza</string>
+    <string name="team_description">Bunaithe i 2023, agus don stair!</string>
+    <string name="shield_description">Sciath GB Lorchos</string>
+    <string name="tournament_description">Comórtas Estrada</string>
+    <string name="course_description">Cúrsa Lorcho</string>
+    <string name="gladiator_description">Gladiator Lorcho</string>
+
+    <!-- XogadoresContent -->
+    <string name="birth_year">Bliain Breithe: %1$s</string>
+    <string name="points">Pointí: %1$d</string>
+</resources>

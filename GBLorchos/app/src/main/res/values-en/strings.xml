@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Application Name -->
+    <string name="app_name">GB Lorchos</string>
+
+    <!-- AppTopBar -->
+    <string name="menu">Menu</string>
+
+    <!-- DrawerContent (Sidebar Menu) -->
+    <string name="main">Home</string>
+    <string name="players">Players</string>
+    <string name="events">Events</string>
+    <string name="results">Results</string>
+    <string name="shop">Store</string>
+
+    <!-- PrincipalContent -->
+    <string name="team_subtitle">Gaelic team from Barbanza</string>
+    <string name="team_description">Founded in 2023, and for the history books!</string>
+    <string name="shield_description">GB Lorchos Shield</string>
+    <string name="tournament_description">Estrada Tournament</string>
+    <string name="course_description">Lorchocourse</string>
+    <string name="gladiator_description">Lorcho Gladiator</string>
+
+    <!-- XogadoresContent -->
+    <string name="birth_year">Birth Year: %1$s</string>
+    <string name="points">Points: %1$d</string>
+</resources>
