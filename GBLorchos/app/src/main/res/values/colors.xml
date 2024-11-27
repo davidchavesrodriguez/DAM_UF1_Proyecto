@@ -8,4 +8,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="lorchos">#5AB5EA</color>
+    <color name="porteiro">#6CB2DE</color>
+    <color name="defensa">#75CA78</color>
+    <color name="medio">#C984D5</color>
+    <color name="dianteiro">#F7A278</color>
 </resources>
