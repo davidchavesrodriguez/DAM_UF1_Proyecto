@@ -24,6 +24,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.gblorchos.R
 import com.example.gblorchos.data.entities.Xogador
+import com.example.gblorchos.screens.getColorByPosicion
 import com.example.gblorchos.ui.theme.GBLorchosTheme
 
 @SuppressLint("SimpleDateFormat")
@@ -115,3 +116,4 @@ fun PreviewXogadoresContent() {
         )
     }
 }
+

@@ -17,9 +17,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.gblorchos.R
 import com.example.gblorchos.ui.theme.GBLorchosTheme
 
@@ -31,7 +33,9 @@ fun AppTopBar(onMenuClick: () -> Unit, modifier: Modifier = Modifier) {
             Text(
                 text = stringResource(R.string.app_name),
                 modifier = Modifier.fillMaxWidth(),
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
+                fontWeight = FontWeight.Bold,
+
             )
         },
         navigationIcon = {
@@ -39,6 +43,7 @@ fun AppTopBar(onMenuClick: () -> Unit, modifier: Modifier = Modifier) {
                 Icon(
                     imageVector = Icons.Default.Menu,
                     contentDescription = stringResource(R.string.menu),
+                    modifier= Modifier.size(56.dp)
                 )
             }
         },

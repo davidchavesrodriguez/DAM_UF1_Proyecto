@@ -19,7 +19,9 @@ import com.example.gblorchos.ui.theme.GBLorchosTheme
 @Composable
 fun DrawerContent(navController: NavController) {
     Column(modifier = Modifier.padding(16.dp)) {
-        Button(onClick = { navController.navigate("principal") }) {
+        Button(onClick = {
+            navController.navigate("principal")
+        }) {
             Text(stringResource(R.string.main))
         }
         Spacer(modifier = Modifier.height(8.dp))
