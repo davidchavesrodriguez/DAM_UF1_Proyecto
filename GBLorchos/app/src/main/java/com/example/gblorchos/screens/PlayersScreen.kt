@@ -35,52 +35,55 @@ fun XogadoresContent(xogadores: List<Xogador>, modifier: Modifier = Modifier) {
             .padding(16.dp)
             .verticalScroll(rememberScrollState())
     ) {
-        xogadores.forEach { xogador ->
-            ElevatedCard(
-                elevation = CardDefaults.cardElevation(defaultElevation = 6.dp),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 8.dp),
-                colors = CardDefaults.cardColors(containerColor = getColorByPosicion(xogador.posicion))
-            ) {
-                Column(modifier = Modifier.padding(16.dp)) {
-                    Text(
-                        text = xogador.nome,
-                        style = MaterialTheme.typography.headlineSmall,
-                        modifier = Modifier.align(CenterHorizontally)
-                    )
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(16.dp),
-                        horizontalArrangement = Arrangement.SpaceEvenly
-                    ) {
+        if (xogadores.isEmpty()) {
+            Text("No hay jugadores disponibles") // Mensaje si la lista está vacía
+        } else {
+            xogadores.forEach { xogador ->
+                ElevatedCard(
+                    elevation = CardDefaults.cardElevation(defaultElevation = 6.dp),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 8.dp),
+                    colors = CardDefaults.cardColors(containerColor = getColorByPosicion(xogador.posicion))
+                ) {
+                    Column(modifier = Modifier.padding(16.dp)) {
                         Text(
-                            text = xogador.posicion,
-                            style = MaterialTheme.typography.bodyLarge,
-                            fontWeight = FontWeight.Bold,
-                            textDecoration = TextDecoration.Underline
+                            text = xogador.nome,
+                            style = MaterialTheme.typography.headlineSmall,
+                            modifier = Modifier.align(CenterHorizontally)
                         )
-                        Text(
-                            text = stringResource(id = R.string.birth_year,
-                                xogador.fechaNacemento.let { date ->
-                                    java.text.SimpleDateFormat("yyyy").format(date)
-                                }
-                            ),
-                            style = MaterialTheme.typography.bodyMedium
-                        )
-                        Text(
-                            text = stringResource(id = R.string.points, xogador.puntos),
-                            style = MaterialTheme.typography.bodyMedium
-                        )
-
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(16.dp),
+                            horizontalArrangement = Arrangement.SpaceEvenly
+                        ) {
+                            Text(
+                                text = xogador.posicion,
+                                style = MaterialTheme.typography.bodyLarge,
+                                fontWeight = FontWeight.Bold,
+                                textDecoration = TextDecoration.Underline
+                            )
+                            Text(
+                                text = stringResource(id = R.string.birth_year,
+                                    xogador.fechaNacemento.let { date ->
+                                        java.text.SimpleDateFormat("yyyy").format(date)
+                                    }
+                                ),
+                                style = MaterialTheme.typography.bodyMedium
+                            )
+                            Text(
+                                text = stringResource(id = R.string.points, xogador.puntos),
+                                style = MaterialTheme.typography.bodyMedium
+                            )
+                        }
                     }
-
                 }
             }
         }
     }
 }
+
 
 // Función que devolve un color según a posición do xogador
 @Composable
@@ -104,13 +107,15 @@ fun PreviewXogadoresContent() {
                     nome = "Xogador 1",
                     posicion = "Dianteiro",
                     fechaNacemento = 11111111L,
-                    puntos = 10
+                    puntos = 10,
+                    equipoId = 1
                 ),
                 Xogador(
                     nome = "Xogador 2",
                     posicion = "Medio",
                     fechaNacemento = 11111111L,
-                    puntos = 15
+                    puntos = 15,
+                    equipoId = 1
                 )
             )
         )

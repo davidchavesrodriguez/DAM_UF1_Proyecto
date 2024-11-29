@@ -1,6 +1,7 @@
 package com.example.gblorchos.data.viewmodels
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.room.Room
@@ -16,10 +17,9 @@ class XogadorViewModel(application: Application) : AndroidViewModel(application)
 
     // Usar una instancia estática de AppDatabase, asegurándose de que la base de datos sea compartida
     private val appDatabase: AppDatabase by lazy {
-        Room.databaseBuilder(application, AppDatabase::class.java, "gblorchos-db").build()
+        AppDatabase.getDatabase(application.applicationContext)
     }
 
-    // MutableStateFlow para almacenar los xogadores
     private val _xogadores = MutableStateFlow<List<Xogador>>(emptyList())
     val xogadores: StateFlow<List<Xogador>> get() = _xogadores
 
@@ -27,16 +27,16 @@ class XogadorViewModel(application: Application) : AndroidViewModel(application)
     fun loadXogadores() {
         viewModelScope.launch {
             try {
-                // Usar Dispatchers.IO para operaciones de base de datos
                 val xogadoresList = withContext(Dispatchers.IO) {
                     appDatabase.xogadorDao().getAllXogadores()
                 }
                 _xogadores.value = xogadoresList
+                Log.d("XogadorViewModel", "Cargados xogadores: $xogadoresList")
             } catch (e: Exception) {
-                // Manejo de errores si ocurre un problema con la base de datos
                 e.printStackTrace()
-                _xogadores.value = emptyList() // En caso de error, asignamos una lista vacía
+                _xogadores.value = emptyList()
             }
         }
     }
+
 }

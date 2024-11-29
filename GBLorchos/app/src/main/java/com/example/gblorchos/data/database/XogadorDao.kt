@@ -13,7 +13,7 @@ interface XogadorDao {
     suspend fun insertXogador(xogador: Xogador)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAllXogadores(xogadores: List<Xogador>)
+    suspend fun insertAll(xogadores: List<Xogador>)
 
     @Query("SELECT * FROM xogadores")
     suspend fun getAllXogadores(): List<Xogador>
