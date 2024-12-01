@@ -2,6 +2,9 @@
     <!-- Nome da aplicación -->
     <string name="app_name">GB Lorchos</string>
 
+    <!-- Shared -->
+    <string name="next">Siguiente</string>
+
     <!-- AppTopBar -->
     <string name="menu">Menú</string>
 

@@ -13,6 +13,7 @@ import androidx.navigation.compose.composable
 import com.example.gblorchos.data.viewmodels.XogadorViewModel
 import com.example.gblorchos.ui.theme.GBLorchosTheme
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import com.example.gblorchos.data.viewmodels.ResultadoViewModel
 import com.example.gblorchos.screens.EventosContent
 import com.example.gblorchos.screens.MainContent
@@ -65,7 +66,7 @@ fun MainScreen() {
             content = { innerPadding ->
                 Column(modifier = Modifier.padding(innerPadding)) {
                     NavHost(navController = navController, startDestination = "principal") {
-                        composable("principal") { MainContent() }
+                        composable("principal") { MainContent(navController = navController) }
                         composable("xogadores") { XogadoresContent(xogadores = xogadores) }
                         composable("eventos") { EventosContent() }
                         composable("resultados") { ResultadosContent(resultados = resultados) }

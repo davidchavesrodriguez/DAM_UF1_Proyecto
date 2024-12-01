@@ -36,7 +36,7 @@ fun XogadoresContent(xogadores: List<Xogador>, modifier: Modifier = Modifier) {
             .verticalScroll(rememberScrollState())
     ) {
         if (xogadores.isEmpty()) {
-            Text("No hay jugadores disponibles") // Mensaje si la lista está vacía
+            Text("No hay jugadores disponibles")
         } else {
             xogadores.forEach { xogador ->
                 ElevatedCard(

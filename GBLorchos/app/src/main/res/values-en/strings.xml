@@ -3,6 +3,9 @@
     <!-- Application Name -->
     <string name="app_name">GB Lorchos</string>
 
+    <!-- Shared -->
+    <string name="next">Next</string>
+
     <!-- AppTopBar -->
     <string name="menu">Menu</string>
 
