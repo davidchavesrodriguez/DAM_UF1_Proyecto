@@ -28,18 +28,18 @@ fun DrawerContent(navController: NavController) {
         Button(onClick = { navController.navigate("xogadores") }) {
             Text(stringResource(R.string.players))
         }
-        Spacer(modifier = Modifier.height(8.dp))
-        Button(onClick = { navController.navigate("eventos") }) {
-            Text(stringResource(R.string.events))
-        }
+//        Spacer(modifier = Modifier.height(8.dp))
+//        Button(onClick = { navController.navigate("eventos") }) {
+//            Text(stringResource(R.string.events))
+//         }
         Spacer(modifier = Modifier.height(8.dp))
         Button(onClick = { navController.navigate("resultados") }) {
             Text(stringResource(R.string.results))
         }
-        Spacer(modifier = Modifier.height(8.dp))
-        Button(onClick = { navController.navigate("tenda") }) {
-            Text(stringResource(R.string.shop))
-        }
+//        Spacer(modifier = Modifier.height(8.dp))
+//        Button(onClick = { navController.navigate("tenda") }) {
+//            Text(stringResource(R.string.shop))
+//        }
     }
 }
 

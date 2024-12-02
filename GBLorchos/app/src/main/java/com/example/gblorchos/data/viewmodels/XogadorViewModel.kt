@@ -15,7 +15,6 @@ import kotlinx.coroutines.flow.StateFlow
 
 class XogadorViewModel(application: Application) : AndroidViewModel(application) {
 
-    // Usar una instancia estática de AppDatabase, asegurándose de que la base de datos sea compartida
     private val appDatabase: AppDatabase by lazy {
         AppDatabase.getDatabase(application.applicationContext)
     }
@@ -23,7 +22,6 @@ class XogadorViewModel(application: Application) : AndroidViewModel(application)
     private val _xogadores = MutableStateFlow<List<Xogador>>(emptyList())
     val xogadores: StateFlow<List<Xogador>> get() = _xogadores
 
-    // Función para cargar los xogadores desde la base de datos
     fun loadXogadores() {
         viewModelScope.launch {
             try {
@@ -31,7 +29,6 @@ class XogadorViewModel(application: Application) : AndroidViewModel(application)
                     appDatabase.xogadorDao().getAllXogadores()
                 }
                 _xogadores.value = xogadoresList
-                Log.d("XogadorViewModel", "Cargados xogadores: $xogadoresList")
             } catch (e: Exception) {
                 e.printStackTrace()
                 _xogadores.value = emptyList()
@@ -39,4 +36,17 @@ class XogadorViewModel(application: Application) : AndroidViewModel(application)
         }
     }
 
+    // Función para insertar un xogador
+    fun insertXogador(xogador: Xogador) {
+        viewModelScope.launch {
+            try {
+                withContext(Dispatchers.IO) {
+                    appDatabase.xogadorDao().insertXogador(xogador)
+                }
+                loadXogadores()
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+    }
 }

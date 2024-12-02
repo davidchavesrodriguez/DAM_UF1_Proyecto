@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Application Name -->
-    <string name="app_name">GB Lorchos</string>
 
     <!-- Shared -->
-    <string name="next">Next</string>
+    <string name="next">Our Players</string>
 
     <!-- AppTopBar -->
     <string name="menu">Menu</string>
@@ -18,13 +17,16 @@
 
     <!-- PrincipalContent -->
     <string name="team_subtitle">Gaelic team from Barbanza</string>
-    <string name="team_description">Founded in 2023, and for the history books!</string>
+    <string name="team_description">From 2023 and for the history books!</string>
     <string name="shield_description">GB Lorchos Shield</string>
     <string name="tournament_description">Estrada Tournament</string>
     <string name="course_description">Lorchocourse</string>
     <string name="gladiator_description">Lorcho Gladiator</string>
+    <string name="foundation_description">Created by frieds and for friends</string>
+
 
     <!-- XogadoresContent -->
-    <string name="birth_year">Birth Year: %1$s</string>
     <string name="points">Points: %1$d</string>
+    <string name="amigos_description">Lorchos\' Friends</string>
+    <string name="players_description">Our squad is composed by the following players</string>
 </resources>

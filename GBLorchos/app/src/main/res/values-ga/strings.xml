@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Application Name -->
-    <string name="app_name">GB Lorchos</string>
 
     <!-- Shared -->
-    <string name="next">Ag leanúint</string>
+    <string name="next">Ár n-imreoirí</string>
 
     <!-- AppTopBar -->
     <string name="menu">Roghchlár</string>
@@ -23,8 +22,10 @@
     <string name="tournament_description">Comórtas Estrada</string>
     <string name="course_description">Cúrsa Lorcho</string>
     <string name="gladiator_description">Gladiator Lorcho</string>
-
+    <string name="foundation_description">Cruthaithe ag cairde agus do chairde</string>
+    <string name="amigos_description">Cairde na Lorchos</string>
     <!-- XogadoresContent -->
-    <string name="birth_year">Bliain Breithe: %1$s</string>
     <string name="points">Pointí: %1$d</string>
+    <string name="players_description">Tá ár scuad comhdhéanta ag na himreoirí seo a leanas</string>
+
 </resources>

@@ -14,7 +14,9 @@ import com.example.gblorchos.data.viewmodels.XogadorViewModel
 import com.example.gblorchos.ui.theme.GBLorchosTheme
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.example.gblorchos.data.entities.Xogador
 import com.example.gblorchos.data.viewmodels.ResultadoViewModel
+import com.example.gblorchos.screens.AddPlayerDialog
 import com.example.gblorchos.screens.EventosContent
 import com.example.gblorchos.screens.MainContent
 import com.example.gblorchos.screens.ResultadosContent
@@ -43,17 +45,14 @@ fun MainScreen() {
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val scope = rememberCoroutineScope()
 
-    // Obtener ViewModel de Xogador y Resultado
     val xogadorViewModel: XogadorViewModel = viewModel()
     val resultadoViewModel: ResultadoViewModel = viewModel()
 
-    // Llamar a loadXogadores() para cargar los jugadores desde la base de datos
     LaunchedEffect(Unit) {
         xogadorViewModel.loadXogadores()
         resultadoViewModel.loadResultados()
     }
 
-    // Usar collectAsState para obtener los xogadores y resultados
     val xogadores by xogadorViewModel.xogadores.collectAsState()
     val resultados by resultadoViewModel.resultados.collectAsState()
 
@@ -67,10 +66,33 @@ fun MainScreen() {
                 Column(modifier = Modifier.padding(innerPadding)) {
                     NavHost(navController = navController, startDestination = "principal") {
                         composable("principal") { MainContent(navController = navController) }
-                        composable("xogadores") { XogadoresContent(xogadores = xogadores) }
+                        composable("xogadores") {
+                            XogadoresContent(
+                                xogadores = xogadores,
+                                modifier = Modifier.fillMaxSize(),
+                                xogadorViewModel = xogadorViewModel
+                            )
+                        }
                         composable("eventos") { EventosContent() }
                         composable("resultados") { ResultadosContent(resultados = resultados) }
                         composable("tenda") { TendaContent() }
+                        composable("add_player") {
+                            AddPlayerDialog(
+                                onDismiss = { navController.popBackStack() },
+                                onSave = { name, position, birthDate, points ->
+                                    val xogador = Xogador(
+                                        nome = name,
+                                        posicion = position,
+                                        fechaNacemento = birthDate.toLong(),
+                                        puntos = points.toInt(),
+                                        equipoId = 5
+                                    )
+                                    xogadorViewModel.insertXogador(xogador)
+                                },
+                                xogadorViewModel = xogadorViewModel
+                            )
+                        }
+
                     }
                 }
             }

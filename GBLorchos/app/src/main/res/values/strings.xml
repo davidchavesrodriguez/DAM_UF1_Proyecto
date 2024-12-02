@@ -1,9 +1,9 @@
 <resources>
     <!-- Nome da aplicación -->
-    <string name="app_name">GB Lorchos</string>
+    <string name="app_name" translatable="false">GB Lorchos</string>
 
     <!-- Shared -->
-    <string name="next">Siguiente</string>
+    <string name="next">Os nosos xogadores</string>
 
     <!-- AppTopBar -->
     <string name="menu">Menú</string>
@@ -17,13 +17,16 @@
 
     <!-- PrincipalContent -->
     <string name="team_subtitle">Equipo gaélico do Barbanza</string>
-    <string name="team_description">Fundado no 2023, e para a historia!</string>
+    <string name="team_description">De 2023 e para a historia!</string>
     <string name="shield_description">Escudo de GB Lorchos</string>
     <string name="tournament_description">Torneo da Estrada</string>
     <string name="course_description">Lorchocurso</string>
     <string name="gladiator_description">Lorcho Gladiador</string>
+    <string name="foundation_description">Creado por amigos e para amigos</string>
 
     <!-- XogadoresContent -->
-    <string name="birth_year">Nacemento: %1$s</string>
+    <string name="birth_year" translatable="false">%1$s</string>
     <string name="points">Puntos: %1$d</string>
+    <string name="amigos_description">Amigos dos Lorchos</string>
+    <string name="players_description">A nosa plantilla está cuberta polos seguintes xogadores</string>
 </resources>
