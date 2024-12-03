@@ -187,15 +187,15 @@ fun MainContent(navController: NavController) {
             modifier = Modifier.padding(vertical = 16.dp)
         )
 
-        Text(
-            text = stringResource(R.string.next),
-            style = MaterialTheme.typography.headlineSmall,
-            modifier = Modifier
-                .padding(16.dp)
-                .align(CenterHorizontally)
-        )
-
-        VideoPlayer(context = LocalContext.current)
+//        Text(
+//            text = stringResource(R.string.next),
+//            style = MaterialTheme.typography.headlineSmall,
+//            modifier = Modifier
+//                .padding(16.dp)
+//                .align(CenterHorizontally)
+//        )
+//
+//        VideoPlayer(context = LocalContext.current)
 
         FilledTonalButton(
             onClick = { navController.navigate("xogadores") },

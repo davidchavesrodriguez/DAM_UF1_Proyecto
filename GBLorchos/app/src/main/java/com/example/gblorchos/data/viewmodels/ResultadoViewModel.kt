@@ -21,12 +21,11 @@ class ResultadoViewModel(application: Application) : AndroidViewModel(applicatio
     private val _resultados = MutableStateFlow<List<ResultadoConEquipos>>(emptyList())
     val resultados: StateFlow<List<ResultadoConEquipos>> get() = _resultados
 
-    // Cargar los resultados con los nombres de los equipos
     fun loadResultados() {
         viewModelScope.launch {
             try {
                 val resultadosList = withContext(Dispatchers.IO) {
-                    appDatabase.resultadoDao().getAllResultadosConNombres()
+                    appDatabase.resultadoDao().getAllResultadosConEquipos()
                 }
 
                 _resultados.value = resultadosList

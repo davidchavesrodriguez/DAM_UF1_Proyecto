@@ -30,7 +30,11 @@ import com.example.gblorchos.ui.theme.GBLorchosTheme
 import androidx.compose.runtime.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import com.example.gblorchos.data.viewmodels.XogadorViewModel
 import java.text.SimpleDateFormat
 import java.util.*
@@ -58,41 +62,60 @@ fun XogadoresContent(
                 .padding(16.dp)
                 .verticalScroll(rememberScrollState())
         ) {
+            // Título de la sección (Jugadores)
             Text(
                 text = stringResource(R.string.players),
-                style = MaterialTheme.typography.headlineLarge,
+                style = MaterialTheme.typography.headlineLarge.copy(
+                    fontWeight = FontWeight.Bold,
+                    color = colorResource(id = R.color.black)  // Cambiar a color principal
+                ),
                 modifier = Modifier.padding(16.dp).align(CenterHorizontally)
             )
+            // Descripción de la sección
             Text(
                 text = stringResource(R.string.players_description),
-                style = MaterialTheme.typography.bodyLarge,
+                style = MaterialTheme.typography.bodyLarge.copy(
+                    fontWeight = FontWeight.Normal,
+                    color = colorResource(id = R.color.black)  // Color más suave para descripción
+                ),
                 modifier = Modifier.padding(16.dp).align(CenterHorizontally)
             )
 
             if (xogadores.isEmpty()) {
-                Text("Error!!")
+                Text(
+                    text = "Error!!",
+                    style = MaterialTheme.typography.bodyLarge.copy(
+                        color = Color.Red,
+                        fontWeight = FontWeight.Bold
+                    ),
+                    modifier = Modifier.align(CenterHorizontally).padding(16.dp)
+                )
             } else {
                 xogadores.forEach { xogador ->
                     ElevatedCard(
                         elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
-                        shape = MaterialTheme.shapes.medium, // Borde redondeado
+                        shape = MaterialTheme.shapes.medium,
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(vertical = 12.dp) // Espacio extra entre cards
+                            .padding(vertical = 12.dp)
                             .border(
                                 8.dp,
                                 getColorByPosition(xogador.posicion),
                                 MaterialTheme.shapes.medium
-                            ) // Aplicar borde color por posición
+                            )
+                            .clickable(
+                                interactionSource = remember { MutableInteractionSource() },
+                                indication = rememberRipple(color = colorResource(id = R.color.lorchos))
+                            ) {
+                                // TODO: Detalles xogador
+                            },
                     ) {
                         Box(
                             modifier = Modifier
                                 .fillMaxSize()
-                                .background(colorResource(id = R.color.lorchos).copy(alpha = 0.15f))
+                                .background(getRandomGradient())
                                 .padding(16.dp)
                         ) {
-                            // Dentro del Column donde se muestran los Xogadores
-
                             Column(modifier = Modifier.fillMaxSize()) {
                                 val imageUrl =
                                     "https://thispersondoesnotexist.com?${xogador.nome.hashCode()}"
@@ -101,59 +124,76 @@ fun XogadoresContent(
                                 // Imagen del jugador
                                 Image(
                                     painter = painter,
-                                    contentDescription = "Foto do xogador",
+                                    contentDescription = xogador.nome,
                                     modifier = Modifier
                                         .size(120.dp)
                                         .align(CenterHorizontally)
-                                        .clip(MaterialTheme.shapes.medium) // Imagen redondeada
+                                        .clip(MaterialTheme.shapes.medium)
                                         .border(
                                             4.dp,
                                             getColorByPosition(xogador.posicion),
                                             MaterialTheme.shapes.medium
-                                        ) // Borde color según posición
+                                        )
                                 )
 
                                 // Nombre del jugador
                                 Text(
                                     text = xogador.nome,
-                                    style = MaterialTheme.typography.headlineSmall.copy(fontWeight = FontWeight.Bold),
+                                    style = MaterialTheme.typography.headlineSmall.copy(
+                                        fontWeight = FontWeight.Bold,
+                                        color = colorResource(id = R.color.black)
+                                    ),
                                     modifier = Modifier
                                         .align(CenterHorizontally)
-                                        .padding(vertical = 8.dp) // Espacio vertical entre nombre y otros detalles
+                                        .padding(vertical = 8.dp)
                                 )
 
-                                // Información del jugador organizada en un solo bloque
+                                // Fila con la información adicional del jugador
                                 Row(
                                     modifier = Modifier
                                         .fillMaxWidth()
-                                        .padding(horizontal = 16.dp), // Paddings horizontal entre columnas
+                                        .padding(horizontal = 16.dp)
+                                        .background(color = colorResource(id = R.color.white)),
                                     horizontalArrangement = Arrangement.SpaceBetween
                                 ) {
+                                    // Posición del jugador
                                     Text(
                                         text = xogador.posicion,
-                                        style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold),
+                                        style = MaterialTheme.typography.bodyMedium.copy(
+                                            fontWeight = FontWeight.Bold,
+                                            color = getColorByPosition(xogador.posicion)
+                                        ),
                                         modifier = Modifier
                                             .padding(end = 8.dp)
-                                            .weight(1f) // Para asegurar que cada texto tenga el mismo espacio
+                                            .weight(1f)
                                             .align(Alignment.CenterVertically),
                                         textDecoration = TextDecoration.Underline
                                     )
+
+                                    // Fecha de nacimiento del jugador
                                     Text(
                                         text = stringResource(
                                             R.string.birth_year,
                                             formatDate(xogador.fechaNacemento)
                                         ),
-                                        style = MaterialTheme.typography.bodyMedium,
+                                        style = MaterialTheme.typography.bodyMedium.copy(
+                                            getColorByPosition(xogador.posicion)
+                                        ),
                                         modifier = Modifier
                                             .padding(end = 8.dp)
-                                            .weight(1f) // Se distribuye mejor
+                                            .weight(1f)
                                             .align(Alignment.CenterVertically)
                                     )
+
+                                    // Puntos del jugador
                                     Text(
                                         text = stringResource(R.string.points, xogador.puntos),
-                                        style = MaterialTheme.typography.bodyMedium,
+                                        style = MaterialTheme.typography.bodyMedium.copy(
+                                            fontWeight = FontWeight.Bold,
+                                            color = getColorByPosition(xogador.posicion)
+                                        ),
                                         modifier = Modifier
-                                            .weight(1f) // Asegura que ocupe el espacio proporcional
+                                            .weight(1f)
                                             .align(Alignment.CenterVertically)
                                     )
                                 }
@@ -193,6 +233,7 @@ fun XogadoresContent(
     }
 }
 
+
 // Función que devuelve un color según la posición del jugador
 @Composable
 fun getColorByPosition(posicion: String): Color {
@@ -213,3 +254,21 @@ fun formatDate(dateLong: Long): String {
     )
     return dateFormat.format(Date(dateLong))
 }
+
+// Color de gradiente aleatorio
+@Composable
+fun getRandomGradient(): Brush {
+    val colors = listOf(
+        colorResource(id = R.color.lorchos).copy(alpha = 0.1f),
+        colorResource(id = R.color.lorchos).copy(alpha = 0.2f),
+        colorResource(id = R.color.lorchos).copy(alpha = 0.3f),
+        colorResource(id = R.color.lorchos).copy(alpha = 0.4f),
+        colorResource(id = R.color.lorchos).copy(alpha = 0.5f),
+        colorResource(id = R.color.lorchos).copy(alpha = 0.6f),
+        colorResource(id = R.color.lorchos).copy(alpha = 0.7f),
+    )
+    val shuffledColors = colors.shuffled(Random(System.currentTimeMillis()))
+
+    return Brush.linearGradient(colors = shuffledColors)
+}
+
