@@ -1,13 +1,17 @@
 package com.example.gblorchos.ui.elements
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -18,7 +22,12 @@ import com.example.gblorchos.ui.theme.GBLorchosTheme
 
 @Composable
 fun DrawerContent(navController: NavController) {
-    Column(modifier = Modifier.padding(16.dp)) {
+    Column(
+        modifier = Modifier.padding(vertical = 16.dp).background(colorResource(id = R.color.lorchos))
+            .fillMaxHeight()
+            .padding(16.dp)
+
+    ) {
         Button(onClick = {
             navController.navigate("principal")
         }) {
