@@ -15,9 +15,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
@@ -33,9 +37,21 @@ fun ResultadosContent(resultados: List<ResultadoConEquipos>, modifier: Modifier 
         modifier = modifier
             .padding(16.dp)
             .verticalScroll(rememberScrollState())
-    ) {
+    )
+    {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.amigos),
+                contentDescription = stringResource(R.string.amigos_description),
+                modifier = Modifier.fillMaxWidth(),
+                contentScale = ContentScale.Crop
+            )
+        }
         resultados.forEach { resultado ->
-            val escudo1 = resultado.equipo1Imagen 
+            val escudo1 = resultado.equipo1Imagen
             val escudo2 = resultado.equipo2Imagen
 
             ElevatedCard(
@@ -70,7 +86,8 @@ fun ResultadosContent(resultados: List<ResultadoConEquipos>, modifier: Modifier 
                         Text(
                             text = "${resultado.equipo1Nombre} vs ${resultado.equipo2Nombre}",
                             style = MaterialTheme.typography.headlineSmall,
-                            modifier = Modifier.align(Alignment.CenterHorizontally)
+                            modifier = Modifier.align(Alignment.CenterHorizontally),
+                            fontWeight = FontWeight.Bold
                         )
                         Row(
                             modifier = Modifier
@@ -80,7 +97,8 @@ fun ResultadosContent(resultados: List<ResultadoConEquipos>, modifier: Modifier 
                         ) {
                             Text(
                                 text = "${resultado.marcadorEquipo1} - ${resultado.marcadorEquipo2}",
-                                style = MaterialTheme.typography.bodyLarge
+                                style = MaterialTheme.typography.bodyLarge,
+                                fontWeight = FontWeight.Bold
                             )
                         }
                     }

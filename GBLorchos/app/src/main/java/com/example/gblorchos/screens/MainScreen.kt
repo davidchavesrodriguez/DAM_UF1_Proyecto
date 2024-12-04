@@ -58,8 +58,8 @@ fun MainContent(navController: NavController) {
                 .fillMaxWidth()
         ) {
             Image(
-                painter = painterResource(id = R.drawable.estrada),
-                contentDescription = stringResource(R.string.tournament_description),
+                painter = painterResource(id = R.drawable.escudo),
+                contentDescription = stringResource(R.string.shield_description),
                 modifier = Modifier.fillMaxWidth(),
                 contentScale = ContentScale.Crop
             )

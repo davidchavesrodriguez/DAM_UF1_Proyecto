@@ -36,7 +36,6 @@ fun AddPlayerDialog(
 
     val positionList = listOf("Porteiro", "Defensa", "Medio", "Dianteiro")
 
-    // Este efecto se lanza cuando showToast cambia
     LaunchedEffect(showToast) {
         if (showToast) {
             // Mostrar el Toast
@@ -86,6 +85,7 @@ fun AddPlayerDialog(
                         showToast = true
                     } else {
                         var validInput = true
+
                         // Validar fecha con regex para asegurarse de que está en el formato correcto
                         val fechaValida = fechaNacemento.matches(Regex("\\d{4}-\\d{2}-\\d{2}"))
                         if (!fechaValida) {
@@ -102,7 +102,7 @@ fun AddPlayerDialog(
                             validInput = false
                         }
 
-                        // Si hay algún error, no guardar el jugador
+                        // Si no hay errores, guardar el jugador
                         if (validInput) {
                             try {
                                 val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
@@ -119,12 +119,12 @@ fun AddPlayerDialog(
                                 // Insertar el jugador en la base de datos
                                 xogadorViewModel.insertXogador(xogador)
 
-                                // Ahora que el jugador se ha guardado, llamar a onSave
-                                onSave(nome, posicion, fechaNacemento, puntos)
-
-                                // Mostrar un mensaje de éxito después de guardar
+                                // Mostrar mensaje de éxito
                                 toastMessage = "Jugador guardado correctamente"
                                 showToast = true
+
+                                // Mover esta línea aquí asegura que se ejecute tras la inserción
+                                onDismiss()
                             } catch (e: Exception) {
                                 toastMessage = "Error al guardar el jugador"
                                 showToast = true
@@ -132,7 +132,8 @@ fun AddPlayerDialog(
                         }
                     }
                 }
-            ) {
+            )
+            {
                 Text("Guardar")
             }
         },

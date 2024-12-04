@@ -17,10 +17,8 @@ import androidx.navigation.NavController
 import com.example.gblorchos.data.entities.Xogador
 import com.example.gblorchos.data.viewmodels.ResultadoViewModel
 import com.example.gblorchos.screens.AddPlayerDialog
-import com.example.gblorchos.screens.EventosContent
 import com.example.gblorchos.screens.MainContent
 import com.example.gblorchos.screens.ResultadosContent
-import com.example.gblorchos.screens.TendaContent
 import com.example.gblorchos.screens.XogadoresContent
 import com.example.gblorchos.ui.elements.AppTopBar
 import com.example.gblorchos.ui.elements.DrawerContent
@@ -73,9 +71,7 @@ fun MainScreen() {
                                 xogadorViewModel = xogadorViewModel
                             )
                         }
-                        composable("eventos") { EventosContent() }
                         composable("resultados") { ResultadosContent(resultados = resultados) }
-                        composable("tenda") { TendaContent() }
                         composable("add_player") {
                             AddPlayerDialog(
                                 onDismiss = { navController.popBackStack() },

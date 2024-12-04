@@ -35,9 +35,15 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import com.example.gblorchos.data.viewmodels.XogadorViewModel
 import java.text.SimpleDateFormat
 import java.util.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+
 
 @Composable
 fun XogadoresContent(
@@ -52,35 +58,38 @@ fun XogadoresContent(
     var fechaNacemento by remember { mutableStateOf("") }
     var puntos by remember { mutableStateOf("") }
 
-    val coroutineScope = rememberCoroutineScope()
-
     Box(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
     ) {
         Column(
             modifier = modifier
-                .padding(16.dp)
+                .fillMaxSize()
                 .verticalScroll(rememberScrollState())
         ) {
-            // Título de la sección (Jugadores)
+            Image(
+                painter = painterResource(id = R.drawable.estrada),
+                contentDescription = stringResource(R.string.tournament_description),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(200.dp),
+                contentScale = ContentScale.Crop
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
+
             Text(
                 text = stringResource(R.string.players),
                 style = MaterialTheme.typography.headlineLarge.copy(
                     fontWeight = FontWeight.Bold,
-                    color = colorResource(id = R.color.black)  // Cambiar a color principal
+                    color = colorResource(id = R.color.black)
                 ),
-                modifier = Modifier.padding(16.dp).align(CenterHorizontally)
-            )
-            // Descripción de la sección
-            Text(
-                text = stringResource(R.string.players_description),
-                style = MaterialTheme.typography.bodyLarge.copy(
-                    fontWeight = FontWeight.Normal,
-                    color = colorResource(id = R.color.black)  // Color más suave para descripción
-                ),
-                modifier = Modifier.padding(16.dp).align(CenterHorizontally)
+                modifier = Modifier
+                    .padding(16.dp)
+                    .align(CenterHorizontally)
             )
 
+            // Lista de jugadores o mensaje de error
             if (xogadores.isEmpty()) {
                 Text(
                     text = "Error!!",
@@ -88,7 +97,9 @@ fun XogadoresContent(
                         color = Color.Red,
                         fontWeight = FontWeight.Bold
                     ),
-                    modifier = Modifier.align(CenterHorizontally).padding(16.dp)
+                    modifier = Modifier
+                        .align(CenterHorizontally)
+                        .padding(16.dp)
                 )
             } else {
                 xogadores.forEach { xogador ->
@@ -97,7 +108,7 @@ fun XogadoresContent(
                         shape = MaterialTheme.shapes.medium,
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(vertical = 12.dp)
+                            .padding(12.dp)
                             .border(
                                 8.dp,
                                 getColorByPosition(xogador.posicion),
@@ -107,7 +118,7 @@ fun XogadoresContent(
                                 interactionSource = remember { MutableInteractionSource() },
                                 indication = rememberRipple(color = colorResource(id = R.color.lorchos))
                             ) {
-                                // TODO: Detalles xogador
+                                // TODO: Acción al hacer clic en el jugador
                             },
                     ) {
                         Box(
@@ -153,10 +164,9 @@ fun XogadoresContent(
                                     modifier = Modifier
                                         .fillMaxWidth()
                                         .padding(horizontal = 16.dp)
-                                        .background(color = colorResource(id = R.color.white)),
-                                    horizontalArrangement = Arrangement.SpaceBetween
+                                        .background(color = colorResource(id = R.color.white))
+                                        .align(CenterHorizontally)
                                 ) {
-                                    // Posición del jugador
                                     Text(
                                         text = xogador.posicion,
                                         style = MaterialTheme.typography.bodyMedium.copy(
@@ -170,7 +180,6 @@ fun XogadoresContent(
                                         textDecoration = TextDecoration.Underline
                                     )
 
-                                    // Fecha de nacimiento del jugador
                                     Text(
                                         text = stringResource(
                                             R.string.birth_year,
@@ -185,7 +194,6 @@ fun XogadoresContent(
                                             .align(Alignment.CenterVertically)
                                     )
 
-                                    // Puntos del jugador
                                     Text(
                                         text = stringResource(R.string.points, xogador.puntos),
                                         style = MaterialTheme.typography.bodyMedium.copy(
@@ -204,6 +212,7 @@ fun XogadoresContent(
             }
         }
 
+        // FloatingActionButton flotante en la esquina inferior derecha
         FloatingActionButton(
             onClick = { showDialog = true },
             modifier = Modifier
@@ -212,27 +221,27 @@ fun XogadoresContent(
         ) {
             Icon(Icons.Filled.Add, contentDescription = "Añadir jugador")
         }
+    }
 
-        if (showDialog) {
-            AddPlayerDialog(
-                onDismiss = { showDialog = false },
-                onSave = { name, position, birthDate, points ->
-                    val newPlayer = Xogador(
-                        nome = name,
-                        posicion = position,
-                        fechaNacemento = birthDate.toLong(),
-                        puntos = points.toInt(),
-                        equipoId = 1
-                    )
-                    xogadorViewModel.insertXogador(newPlayer)
-                    showDialog = false
-                },
-                xogadorViewModel = xogadorViewModel
-            )
-        }
+    // Diálogo para añadir jugador
+    if (showDialog) {
+        AddPlayerDialog(
+            onDismiss = { showDialog = false },
+            onSave = { name, position, birthDate, points ->
+                val newPlayer = Xogador(
+                    nome = name,
+                    posicion = position,
+                    fechaNacemento = birthDate.toLong(),
+                    puntos = points.toInt(),
+                    equipoId = 1
+                )
+                showDialog = false
+                xogadorViewModel.insertXogador(newPlayer)
+            },
+            xogadorViewModel = xogadorViewModel
+        )
     }
 }
-
 
 // Función que devuelve un color según la posición del jugador
 @Composable
